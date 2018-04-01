@@ -1,0 +1,87 @@
+//This sketch is a window in a brick background
+//the colour and opacity change with mouse movement
+//Finally a striped background is overlain on the mouse being pressed.
+
+var brickback //the name for calling the brickwall
+
+function preload() {
+
+  // the following image was downloaded from https://pixabay.com/en/wall-bricks-paint-pattern-black-2583255/
+  //pixabay allows the use of images under the creative commons licence.
+  brickback = loadImage("brickwall.JPG");
+}
+
+function setup() {
+  createCanvas(505, 505);
+
+}
+
+//stained glass window in brickwall
+//changing to a softly striped background
+
+
+function draw() {
+  background(255, 102, 26, 1);
+  image(brickback, 0, 0);
+
+  //Stripes in background with fill loop
+  if (mouseIsPressed) {
+    fill(244, 167, 66);
+
+    for (var row = 0; row < 50.5; row = row + 1) { // 
+
+      for (var col = (0); col < 25.2; col = col + 1) {
+
+
+        fill(102, 53, 0);
+
+        // introducing modulo! a%b is the remainder of a divided by b
+        // this code was used in class, it will draw a rectangle based on the
+        // position of row and column, it's a good example of iteration.
+
+        if (row % 2 == 0) { // in even rows
+          if (col % 2 == 0) fill(77, 38, 0); // even columns are dark wood
+        }
+
+        if (row % 2 == 1) { // in odd rows
+          if (col % 2 == 1) fill(155, 89, 27); // odd columns are white
+        }
+        // this next line is the one I need to uncomment to make the stripes appear
+        rect(col * 20, row * 10, 50, 50); // adding the colour to the stripes
+
+      } // end of the columns loop
+
+    } // end of the rows loop
+  } // end of transmute loop
+
+  //set stroke (thickness and colour of outline)
+  strokeWeight(1); // thickness in pixels  
+  stroke(0); // stroke colour 
+
+  //make shape area neutral so it appears
+  //set background of shape
+  fill(252, 252, 252)
+  rect(200, 100, 75, 125)
+  rect(125, 225, 75, 125)
+  rect(125, 100, 75, 125)
+  rect(200, 225, 75, 125)
+  arc(200, 100, 150, 150, PI, TWO_PI);
+
+  //attempting to change opacity via mouse movement
+  //set colour
+  fill(255, 255, mouseY, mouseX) // colour changes as the mouse is moved
+
+  // four rectangles as yellow siloutte
+  rect(200, 100, 75, 125);
+  rect(125, 225, 75, 125);
+  rect(125, 100, 75, 125);
+  rect(200, 225, 75, 125);
+  arc(200, 100, 150, 150, PI, TWO_PI);
+
+  // circle in the middle in colour purple
+
+  stroke(1 * mouseX); // stroke colour also changes
+  fill(223, 128, 255, mouseX); // the opacity changes with mouse movement
+  ellipse(200, 225, 50, 50);
+
+}
